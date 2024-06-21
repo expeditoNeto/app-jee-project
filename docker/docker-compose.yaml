@@ -9,6 +9,7 @@ services:
     container_name: db-app-mysql
     command: --default-authentication-plugin=mysql_native_password
     environment:
+      MYSQL_DATABASE: 'dados'
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_ROOT_PASSWORD: ""
     networks:

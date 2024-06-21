@@ -1,39 +1,52 @@
 package com.architecture.infrastructure.repositories;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
-import java.util.UUID;
 
 import com.architecture.domain.entities.BaseEntity;
 import com.architecture.domain.repositories.contracts.IGenericRepository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+
 public class GenericRepository<Entity extends BaseEntity> implements IGenericRepository<Entity> {
 
-	private static final long serialVersionUID = 5338563468610393543L;
+	//@Inject
+	protected EntityManager entityManager;
+	private Class<Entity> classEntity;
 	
-	
-	
-	@Override
-	public Entity salvar(Entity entity) {
-		// TODO Auto-generated method stub
-		return null;
+	@SuppressWarnings({ "unchecked", })
+	protected GenericRepository(EntityManager entityManager) {
+		Type t = getClass().getGenericSuperclass();
+        ParameterizedType pt = (ParameterizedType) t;
+        classEntity = (Class<Entity>) pt.getActualTypeArguments()[0];
+        this.entityManager = entityManager;
 	}
 
 	@Override
-	public void excluir(Entity entity) {
-		// TODO Auto-generated method stub
-		
+	public void salvar(Entity entity) {		
+		entityManager.merge(entity);
 	}
 
 	@Override
-	public Entity bucarPorId(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public void excluir(Long id) {
+		Entity entity = bucarPorId(id);
+		entityManager.remove(entity);		
+	}
+
+	
+	@Override
+	public Entity bucarPorId(Long id) {		
+		return entityManager.find(classEntity, id);
 	}
 
 	@Override
 	public List<Entity> listar() {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder sql = new StringBuilder(80);
+		sql.append("FROM ").append(classEntity.getName());
+		TypedQuery<Entity> query = entityManager.createQuery(sql.toString(), classEntity);
+		return query.getResultList();
 	}
 
 }
