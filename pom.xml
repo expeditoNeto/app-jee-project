@@ -35,27 +35,27 @@
 		    <scope>provided</scope>
 		</dependency>
 		
-		<!--<dependency>
+		<dependency>
 		    <groupId>org.hibernate</groupId>
 		    <artifactId>hibernate-validator</artifactId>
 		    <version>6.2.5.Final</version>
 		    <scope>compile</scope>
-		</dependency>-->
-		
+		</dependency>
+		<!--
 		<dependency>
 		    <groupId>jakarta.validation</groupId>
 		    <artifactId>jakarta.validation-api</artifactId>
 		    <version>3.1.0</version>
 		    <scope>compile</scope>
-		</dependency>
+		</dependency>-->
 		
 		<dependency>
 		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-entitymanager</artifactId>
-		    <version>5.6.15.Final</version>
-		    <scope>compile</scope>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>6.5.2.Final</version>
+		    <type>compile</type>
 		</dependency>
-		
+						
 		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
