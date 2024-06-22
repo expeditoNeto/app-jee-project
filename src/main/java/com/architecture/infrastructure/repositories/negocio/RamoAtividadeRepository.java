@@ -6,15 +6,14 @@ import com.architecture.domain.entities.RamoAtividade;
 import com.architecture.domain.repositories.contracts.negocio.IRamoAtividade;
 import com.architecture.infrastructure.repositories.GenericRepository;
 
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
 public class RamoAtividadeRepository extends GenericRepository<RamoAtividade> implements IRamoAtividade {
 
 	private static final long serialVersionUID = -212350208602528629L;
 
-	protected RamoAtividadeRepository(EntityManager entityManager) {
-		super(entityManager);
+	public RamoAtividadeRepository() {
+		super();
 	}
 
 	@Override

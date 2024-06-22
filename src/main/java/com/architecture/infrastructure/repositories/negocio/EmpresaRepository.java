@@ -6,15 +6,14 @@ import com.architecture.domain.entities.Empresa;
 import com.architecture.domain.repositories.contracts.negocio.IEmpresaRepository;
 import com.architecture.infrastructure.repositories.GenericRepository;
 
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
 public class EmpresaRepository extends GenericRepository<Empresa> implements IEmpresaRepository {
 
 	private static final long serialVersionUID = -6804585656385295702L;
 
-	public EmpresaRepository(EntityManager entityManager) {
-		super(entityManager);		
+	public EmpresaRepository() {
+		super();		
 	}
 
 	@Override

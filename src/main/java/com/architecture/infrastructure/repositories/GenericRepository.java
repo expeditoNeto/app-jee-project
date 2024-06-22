@@ -4,24 +4,25 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import com.architecture.domain.entities.BaseEntity;
 import com.architecture.domain.repositories.contracts.IGenericRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
-public class GenericRepository<Entity extends BaseEntity> implements IGenericRepository<Entity> {
+public abstract class GenericRepository<Entity extends BaseEntity> implements IGenericRepository<Entity> {
 
-	//@Inject
+	@Inject
 	protected EntityManager entityManager;
 	private Class<Entity> classEntity;
 	
 	@SuppressWarnings({ "unchecked", })
-	protected GenericRepository(EntityManager entityManager) {
+	protected GenericRepository() {
 		Type t = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) t;
         classEntity = (Class<Entity>) pt.getActualTypeArguments()[0];
-        this.entityManager = entityManager;
 	}
 
 	@Override
