@@ -47,6 +47,7 @@ public class EmpresaAppService implements IEmpresaAppService {
 	}
 
 	@Override
+	@Transacional
 	public EmpresaModel bucarPorId(UUID id)  throws NegocioException{
 		Empresa empresa = null;
 		try {
