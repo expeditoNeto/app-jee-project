@@ -16,4 +16,12 @@ services:
       - app-network
     ports:
       - 3306:3306
-    restart: unless-stopped 
+    restart: unless-stopped
+  app:
+    container_name: app-jsf
+    image: app-jee-17-v2.8.1:latest
+    ports:
+      - 8081:8080
+    
+    networks:
+      - app-network

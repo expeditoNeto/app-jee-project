@@ -3,12 +3,12 @@ package com.architecture.infrastructure.repositories.negocio;
 import java.util.List;
 
 import com.architecture.domain.entities.RamoAtividade;
-import com.architecture.domain.repositories.contracts.negocio.IRamoAtividade;
+import com.architecture.domain.repositories.contracts.negocio.IRamoAtividadeRepository;
 import com.architecture.infrastructure.repositories.GenericRepository;
 
 import jakarta.persistence.TypedQuery;
 
-public class RamoAtividadeRepository extends GenericRepository<RamoAtividade> implements IRamoAtividade {
+public class RamoAtividadeRepository extends GenericRepository<RamoAtividade> implements IRamoAtividadeRepository {
 
 	private static final long serialVersionUID = -212350208602528629L;
 

@@ -6,6 +6,6 @@ import java.util.List;
 import com.architecture.domain.entities.RamoAtividade;
 import com.architecture.domain.repositories.contracts.IGenericRepository;
 
-public interface IRamoAtividade extends IGenericRepository<RamoAtividade>, Serializable {
+public interface IRamoAtividadeRepository extends IGenericRepository<RamoAtividade>, Serializable {
 	public List<RamoAtividade> listarPorDescricao(String descricao);
 }

@@ -5,7 +5,7 @@
 	<groupId>com.jee.project</groupId>
 	<artifactId>jsf-primefaces</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>jsf-primefaces</name>
 	<description>Projeto JEE...</description>
 	
@@ -61,6 +61,12 @@
 	        <artifactId>mysql-connector-java</artifactId>
 	        <version>8.0.16</version>
 	    </dependency>
+	    
+	    <dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.0.0</version>
+		</dependency>
 	    
 	</dependencies>
 	
