@@ -1,6 +1,7 @@
 package com.architecture.application.services.concrete;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
@@ -10,8 +11,7 @@ import com.architecture.domain.entities.Empresa;
 import com.architecture.domain.services.contracts.IEmpresaService;
 import com.architecture.infrastructure.util.IMapper;
 import com.architecture.infrastructure.util.NegocioException;
-
-import jakarta.transaction.Transactional;
+import com.architecture.infrastructure.util.Transacional;
 
 public class EmpresaAppService implements IEmpresaAppService {
 
@@ -23,7 +23,7 @@ public class EmpresaAppService implements IEmpresaAppService {
 	private IMapper mapper;
 	
 	@Override
-	@Transactional
+	@Transacional
 	public void salvar(EmpresaModel model)  throws NegocioException{
 		Empresa empresa = this.mapper.map(model, Empresa.class);
 		
@@ -36,7 +36,8 @@ public class EmpresaAppService implements IEmpresaAppService {
 	}
 
 	@Override
-	public void excluir(Long id)  throws NegocioException{
+	@Transacional
+	public void excluir(UUID id)  throws NegocioException{
 		try {
 			this.empresaService.excluir(id);
 		}catch (Exception e) {
@@ -46,7 +47,7 @@ public class EmpresaAppService implements IEmpresaAppService {
 	}
 
 	@Override
-	public EmpresaModel bucarPorId(Long id)  throws NegocioException{
+	public EmpresaModel bucarPorId(UUID id)  throws NegocioException{
 		Empresa empresa = null;
 		try {
 			empresa = this.empresaService.bucarPorId(id);
@@ -61,16 +62,8 @@ public class EmpresaAppService implements IEmpresaAppService {
 	}
 
 	@Override
-	public List<EmpresaModel> listar()  throws NegocioException{
-		List<Empresa> empresas = null;
-		try {
-			empresas = this.empresaService.listar();
-			if (empresas.isEmpty()) {
-				throw new NegocioException("N\u00E3o temos empresa cadastradas.");
-			}
-		}catch (Exception e) {
-			throw new NegocioException("Ocorreu um erro ao buscar empresas.");
-		}
+	public List<EmpresaModel> listar(){
+		List<Empresa> empresas = this.empresaService.listar();			
 		return mapper.map(empresas, EmpresaModel[].class);
 	}
 

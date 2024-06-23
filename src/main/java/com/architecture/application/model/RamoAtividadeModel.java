@@ -3,11 +3,6 @@ package com.architecture.application.model;
 import java.io.Serializable;
 import java.util.Set;
 
-import com.architecture.domain.entities.Empresa;
-import com.architecture.domain.entities.RamoAtividade;
-
-import jakarta.persistence.Column;
-
 public class RamoAtividadeModel extends BaseModel implements Serializable {
 
 	private static final long serialVersionUID = 2522498815796364860L;

@@ -2,8 +2,6 @@ package com.architecture.presentation.viewmodel;
 
 import java.util.Set;
 
-import com.architecture.application.model.EmpresaModel;
-
 public class RamoAtividadeViewModel extends BaseViewModel {
 	
 private Set<EmpresaViewModel> empresas;

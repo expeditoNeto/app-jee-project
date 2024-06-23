@@ -1,14 +1,19 @@
 package com.architecture.application.model;
 
+import java.util.UUID;
+
+import jakarta.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class BaseModel {
 	
-	protected Long id;
+	protected UUID id;
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 	
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 }

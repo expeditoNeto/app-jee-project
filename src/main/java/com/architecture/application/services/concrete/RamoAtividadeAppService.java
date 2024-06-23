@@ -1,6 +1,7 @@
 package com.architecture.application.services.concrete;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
@@ -10,6 +11,7 @@ import com.architecture.domain.entities.RamoAtividade;
 import com.architecture.domain.services.contracts.IRamoAtividadeService;
 import com.architecture.infrastructure.util.IMapper;
 import com.architecture.infrastructure.util.NegocioException;
+import com.architecture.infrastructure.util.Transacional;
 
 import jakarta.transaction.Transactional;
 
@@ -22,7 +24,9 @@ public class RamoAtividadeAppService implements IRamoAtividadeAppService {
 	private IRamoAtividadeService ramoAtividadeService;
 	@Inject
 	private IMapper mapper;
+	
 	@Override
+	@Transacional
 	public void salvar(RamoAtividadeModel model)  throws NegocioException{
 		RamoAtividade ramoAtividade = this.mapper.map(model, RamoAtividade.class);
 		
@@ -35,7 +39,8 @@ public class RamoAtividadeAppService implements IRamoAtividadeAppService {
 	}
 
 	@Override
-	public void excluir(Long id)  throws NegocioException{
+	@Transacional
+	public void excluir(UUID id)  throws NegocioException{
 
 		try {
 			this.ramoAtividadeService.excluir(id);;
@@ -46,7 +51,7 @@ public class RamoAtividadeAppService implements IRamoAtividadeAppService {
 	}
 
 	@Override
-	public RamoAtividadeModel bucarPorId(Long id)  throws NegocioException{
+	public RamoAtividadeModel bucarPorId(UUID id)  throws NegocioException{
 		RamoAtividade ramoAtividade = null;
 		try {
 			ramoAtividade = this.ramoAtividadeService.bucarPorId(id);
@@ -61,16 +66,8 @@ public class RamoAtividadeAppService implements IRamoAtividadeAppService {
 	}
 
 	@Override
-	public List<RamoAtividadeModel> listar()  throws NegocioException{
-		List<RamoAtividade> ramoAtividades = null;
-		try {
-			ramoAtividades = this.ramoAtividadeService.listar();
-			if (ramoAtividades.isEmpty()) {
-				throw new NegocioException("N\u00E3o temos Ramo Atividade cadastradas.");
-			}
-		}catch (Exception e) {
-			throw new NegocioException("Ocorreu um erro ao buscar Ramo Atividade.");
-		}
+	public List<RamoAtividadeModel> listar() {
+		List<RamoAtividade> ramoAtividades =  this.ramoAtividadeService.listar();
 		return mapper.map(ramoAtividades, RamoAtividadeModel[].class);
 	}
 

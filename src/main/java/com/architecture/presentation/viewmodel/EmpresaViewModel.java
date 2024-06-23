@@ -3,25 +3,38 @@ package com.architecture.presentation.viewmodel;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.br.CNPJ;
+
 import com.architecture.application.model.TipoEmpresaModel;
 
 public class EmpresaViewModel extends BaseViewModel implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 	
+	private static final long serialVersionUID = -7031668245588822014L;
+	
+	@NotEmpty
 	private String nomeFantasia;
 	
+	@NotEmpty
 	private String razaoSocial;
 	
+	@CNPJ
+	@NotNull
 	private String cnpj;
 	
+	@NotNull
 	private Date dataFundacao;
 	
+	@NotNull
 	private RamoAtividadeViewModel ramoAtividade;
 	
+	@NotNull
 	private TipoEmpresaModel tipo;
 	
-	public boolean isRendered() {
+	public boolean isRenderizar() {
 		return this != null;
 	}
 		

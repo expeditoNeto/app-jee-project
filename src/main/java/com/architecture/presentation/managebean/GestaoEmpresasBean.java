@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.faces.bean.ViewScoped;
 import javax.faces.convert.Converter;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -33,7 +33,7 @@ public class GestaoEmpresasBean implements Serializable {
 	
 	private EmpresaViewModel empresaViewModel;
 	private List<EmpresaViewModel> empresaViewModels;
-	private PesquisaViewModel pesquisa;
+	private PesquisaViewModel pesquisa = new PesquisaViewModel();
 	private Converter ramoAtividadeConverter;
 	
 	@Inject
@@ -45,13 +45,12 @@ public class GestaoEmpresasBean implements Serializable {
 	@Inject
 	private IRamoAtividadeAppService ramoAtividadeAppService;
 	
+	
 	public void todasEmpresas() {
-		try {
-			List<EmpresaModel> empresaModels = this.empresaAppService.listar();
-			this.empresaViewModels = mapper.map(empresaModels, EmpresaViewModel[].class);
-		} catch (NegocioException e) {
-			this.messages.error(e.getMessage());
-		}
+		
+		List<EmpresaModel> empresaModels = this.empresaAppService.listar();
+		this.empresaViewModels = mapper.map(empresaModels, EmpresaViewModel[].class);		
+		
 	}
 	
 	public void pesquisar() {
@@ -69,17 +68,11 @@ public class GestaoEmpresasBean implements Serializable {
         
         try {
 			this.empresaAppService.salvar(empresaModel);
+			todasEmpresas();
 		} catch (NegocioException e) {
 			this.messages.error(e.getMessage());
 			return;
 		}
-        
-        /* (jaHouvePesquisa()) {
-            pesquisar();
-        } else {
-            todasEmpresas();
-        }*/
-        
         this.messages.info("Empresa salva com sucesso!");
         
         RequestContext.getCurrentInstance().update(Arrays.asList(
@@ -105,6 +98,20 @@ public class GestaoEmpresasBean implements Serializable {
 	
 	public void prepararNovaEmpresa() {
         this.empresaViewModel = new EmpresaViewModel();
+    }
+	
+	public void excluir() {
+        try {
+			empresaAppService.excluir(empresaViewModel.getId());
+			empresaViewModel = null;
+	        
+	        todasEmpresas();
+		} catch (NegocioException e) {
+			this.messages.error(e.getMessage());
+			return;
+		}
+                
+        messages.info("Empresa excluída com sucesso!");
     }
 
 	public EmpresaViewModel getEmpresaViewModel() {
@@ -139,4 +146,7 @@ public class GestaoEmpresasBean implements Serializable {
 		return ramoAtividadeConverter;
 	}
 	
+	public boolean isEmpresaSeleciona() {
+        return !(empresaViewModel != null && empresaViewModel.getId() != null);
+    }
 }

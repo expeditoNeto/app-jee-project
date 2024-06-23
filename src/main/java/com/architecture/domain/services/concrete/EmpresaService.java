@@ -1,6 +1,7 @@
 package com.architecture.domain.services.concrete;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
@@ -20,12 +21,12 @@ public class EmpresaService implements IEmpresaService {
 	}
 
 	@Override
-	public void excluir(Long id) {
+	public void excluir(UUID id) {
 		empresaRepository.excluir(id);
 	}
 
 	@Override
-	public Empresa bucarPorId(Long id) {
+	public Empresa bucarPorId(UUID id) {
 		return empresaRepository.bucarPorId(id);
 	}
 
@@ -36,7 +37,13 @@ public class EmpresaService implements IEmpresaService {
 
 	@Override
 	public List<Empresa> listarPorNomeFantasia(String nomeFantasia) {
-		return empresaRepository.listarPorNomeFantasia(nomeFantasia);
+		String paramentro = null;
+		if(nomeFantasia != null) {
+			if(!nomeFantasia.contains("%")) {
+				paramentro = nomeFantasia.toLowerCase();
+			}
+		}
+		return empresaRepository.listarPorNomeFantasia(paramentro);
 	}
 
 }

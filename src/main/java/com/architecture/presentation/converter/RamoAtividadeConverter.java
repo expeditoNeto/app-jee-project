@@ -1,12 +1,12 @@
 package com.architecture.presentation.converter;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
-import com.architecture.application.model.RamoAtividadeModel;
 import com.architecture.presentation.viewmodel.RamoAtividadeViewModel;
 
 public class RamoAtividadeConverter implements Converter {
@@ -23,7 +23,7 @@ public class RamoAtividadeConverter implements Converter {
             return null;
         }
         
-        Long id = Long.valueOf(value);
+        UUID id = UUID.fromString(value);
         
         return ramoAtividadeViewModels.stream()
         	.filter(ra -> id.equals(ra.getId()))
@@ -37,7 +37,7 @@ public class RamoAtividadeConverter implements Converter {
             return null;
         }
         
-        RamoAtividadeModel ramoAtividade = (RamoAtividadeModel)value;
+        RamoAtividadeViewModel ramoAtividade = (RamoAtividadeViewModel)value;
         
         return ramoAtividade.getId().toString();
     }

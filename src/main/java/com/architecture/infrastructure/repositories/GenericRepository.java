@@ -3,6 +3,7 @@ package com.architecture.infrastructure.repositories;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
@@ -26,19 +27,19 @@ public abstract class GenericRepository<Entity extends BaseEntity> implements IG
 	}
 
 	@Override
-	public void salvar(Entity entity) {		
+	public void salvar(Entity entity) {	
 		entityManager.merge(entity);
 	}
 
 	@Override
-	public void excluir(Long id) {
+	public void excluir(UUID id) {
 		Entity entity = bucarPorId(id);
 		entityManager.remove(entity);		
 	}
 
 	
 	@Override
-	public Entity bucarPorId(Long id) {		
+	public Entity bucarPorId(UUID id) {		
 		return entityManager.find(classEntity, id);
 	}
 

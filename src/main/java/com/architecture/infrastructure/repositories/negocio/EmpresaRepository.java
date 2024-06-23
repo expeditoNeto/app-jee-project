@@ -27,7 +27,7 @@ public class EmpresaRepository extends GenericRepository<Empresa> implements IEm
 	private String sqlListarPorNome() {
 		StringBuilder sql = new StringBuilder(200);
 		
-		sql.append("SELECT e FROM Empresa WHERE nomeFAntasio like :nomeFantasia");
+		sql.append("SELECT e FROM Empresa e WHERE LOWER(e.nomeFantasia) like :nomeFantasia");
 		
 		return sql.toString();
 	}

@@ -28,7 +28,7 @@ public class RamoAtividadeRepository extends GenericRepository<RamoAtividade> im
 	private String sqlListarPorDescricao() {
 		StringBuilder sql = new StringBuilder(200);
 		
-		sql.append("SELECT ra FROM RamoAtividade WHERE descricao like :descricao");
+		sql.append("SELECT ra FROM RamoAtividade ra WHERE LOWER(ra.descricao) like :descricao");
 		
 		return sql.toString();
 	}

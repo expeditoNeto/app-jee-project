@@ -5,7 +5,11 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,10 +20,13 @@ public class RamoAtividade extends BaseEntity implements Serializable{
 	
 	@OneToMany(mappedBy = "ramoAtividade")
 	private Set<Empresa> empresas;
-	
+
 	@Column(nullable = false, length = 80)
 	private String descricao;
-
+	
+	public RamoAtividade() {
+		super();
+	}
 	
 	public Set<Empresa> getEmpresas() {
 		return empresas;

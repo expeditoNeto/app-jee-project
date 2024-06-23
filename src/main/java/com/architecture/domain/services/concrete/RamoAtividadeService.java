@@ -1,6 +1,7 @@
 package com.architecture.domain.services.concrete;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
@@ -21,13 +22,13 @@ public class RamoAtividadeService implements IRamoAtividadeService {
 	}
 
 	@Override
-	public void excluir(Long id) {
+	public void excluir(UUID id) {
 		ramoAtividadeRepository.equals(id);
 
 	}
 
 	@Override
-	public RamoAtividade bucarPorId(Long id) {
+	public RamoAtividade bucarPorId(UUID id) {
 		return ramoAtividadeRepository.bucarPorId(id);
 	}
 
@@ -38,7 +39,11 @@ public class RamoAtividadeService implements IRamoAtividadeService {
 
 	@Override
 	public List<RamoAtividade> listarPorDescricao(String descricao) {
-		return ramoAtividadeRepository.listarPorDescricao(descricao);
+		String paramentro = null;
+		if(descricao != null) {
+			paramentro = descricao.toLowerCase();
+		}
+		return ramoAtividadeRepository.listarPorDescricao(paramentro);
 	}
 
 }
