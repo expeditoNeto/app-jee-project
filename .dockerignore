@@ -1,0 +1,9 @@
+.classpath
+docker-compose.yaml
+Dockerfile
+.git
+.gitignore
+LICENSE
+.project
+.settings
+target/
